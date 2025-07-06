@@ -1,7 +1,7 @@
 import supabase, { supabaseUrl } from "./supabase";
 
 const GetCabines = async () => {
-  const { data, error } = await supabase.from("cabines").select("*");
+  const { data, error } = await supabase.from("cabins").select("*");
   if (error) {
     console.error(error);
     throw new Error(error.details);
@@ -9,7 +9,7 @@ const GetCabines = async () => {
   return data as Cabin[];
 };
 const DeleteCabin = async (id: number) => {
-  const { data, error } = await supabase.from("cabines").delete().eq("id", id);
+  const { data, error } = await supabase.from("cabins").delete().eq("id", id);
   if (error) {
     console.error(error);
     throw new Error(error.details);
@@ -32,7 +32,7 @@ const createEditCabin = async (cabin: cabineForm, id?: number) => {
   }
   if (id) {
     query = supabase
-      .from("cabines")
+      .from("cabins")
       .update({ ...cabin, image: imagePath })
       .eq("id", id);
   }

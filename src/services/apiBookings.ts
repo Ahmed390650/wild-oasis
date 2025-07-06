@@ -16,7 +16,7 @@ type getBookingType = {
 }
 
 export async function getBooking({ filter, sortBy, page = 1 }: getBookingType) {
-  let query = supabase.from("booking").select("id, created_at, startDate, endDate, numNights, numGuests, status, totalPrice, cabines(name), guests(fullName, email)", { count: "exact" });
+  let query = supabase.from("booking").select("id, created_at, startDate, endDate, numNights, numGuests, status, totalPrice, cabins(name), guests(fullName, email)", { count: "exact" });
   if (filter?.columnValue !== null && filter?.columnValue !== "all" && filter) {
     const { columnName, columnValue } = filter;
     query = query.eq(columnName, columnValue);
@@ -36,7 +36,7 @@ export async function getBooking({ filter, sortBy, page = 1 }: getBookingType) {
   return { data, count };
 }
 export async function getBookingById(id: number) {
-  const { error, data } = await supabase.from("booking").select("*, cabines(name), guests(fullName, email, country, countryFlag, nationalID)").eq("id", id).single();
+  const { error, data } = await supabase.from("booking").select("*, cabins(name), guests(fullName, email, country, countryFlag, nationalID)").eq("id", id).single();
 
   if (error) {
     console.error(error);

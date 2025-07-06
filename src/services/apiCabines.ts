@@ -28,7 +28,7 @@ const createEditCabin = async (cabin: cabineForm, id?: number) => {
   // 1. create cabin
   let query;
   if (!id) {
-    query = supabase.from("cabines").insert([{ ...cabin, image: imagePath }]);
+    query = supabase.from("cabins").insert([{ ...cabin, image: imagePath }]);
   }
   if (id) {
     query = supabase
